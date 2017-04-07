@@ -64,7 +64,9 @@ class PersonalController extends BaseController{
      */
     public function edit($id)
     {
-        //
+        $personal = Personal::find($id);
+
+        return View::make('personal.edit')->with('personal', $personal);
     }
 
     /**
@@ -75,7 +77,16 @@ class PersonalController extends BaseController{
      */
     public function update($id)
     {
-        //
+       
+            $personal = Personal::find($id);
+            $personal->nombre = Input::get('nombre');
+            $personal->apellido = Input::get('apellido');
+            $personal->save();
+
+            // redirect
+            Session::flash('message', 'Personal actualizado');
+            return Redirect::to('personal');
+        
     }
 
     /**
@@ -86,7 +97,12 @@ class PersonalController extends BaseController{
      */
     public function destroy($id)
     {
-        //
+        $personal = Personal::find($id);
+        $personal->delete();
+
+        // redirect
+        Session::flash('message', 'Personal eliminado');
+        return Redirect::to('personal');
     }
 	
 
