@@ -1,17 +1,16 @@
 <?php
 
-class JubiladoController extends BaseController
-{
-	
-	 /**
+class PersonalController extends BaseController{
+
+	/**
      * Display a listing of the resource.
      *
      * @return Response
      */
     public function index()
     {
-        $jubilados = Jubilado::all();
-        return View::make('jubilados.index')->with('jubilados',$jubilados);
+        $personal = Personal::all();
+        return View::make('personal.index')->with('personal',$personal);
     }
 
     /**
@@ -21,7 +20,7 @@ class JubiladoController extends BaseController
      */
     public function create()
     {
-        return View::make('jubilados.create');
+        return View::make('personal.create');
     }
 
     /**
@@ -31,15 +30,15 @@ class JubiladoController extends BaseController
      */
     public function store()
     {
-        $jubilado = new Jubilado;
-        $jubilado->nombre = Input::get('nombre');
-        $jubilado->apellido = Input::get('apellido');
+        $personal = new Personal;
+        $personal->nombre = Input::get('nombre');
+        $personal->apellido = Input::get('apellido');
       
-        $jubilado->save();
+        $personal->save();
 
         // redirect
-        Session::flash('message', 'Jubilado guardado exitosamente!');
-        return Redirect::to('jubilados');
+        Session::flash('message', 'Personal guardado exitosamente!');
+        return Redirect::to('personal');
     }
 
     /**
@@ -50,7 +49,11 @@ class JubiladoController extends BaseController
      */
     public function show($id)
     {
-        //
+         // get the nerd
+        $personal = Personal::find($id);
+
+        // show the view and pass the nerd to it
+        return View::make('personal.show')->with('personal', $personal);
     }
 
     /**
@@ -85,8 +88,8 @@ class JubiladoController extends BaseController
     {
         //
     }
+	
 
 }
-
 
 ?>

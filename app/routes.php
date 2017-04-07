@@ -11,7 +11,12 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::get('/', function(){
+	return View::make('index');
 });
+
+/* Rutas para CRUD Personal */
+
+Route::resource('jubilados', 'JubiladoController');
+
+Route::resource('personal', 'PersonalController');
