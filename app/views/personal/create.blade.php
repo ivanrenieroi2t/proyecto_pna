@@ -26,15 +26,22 @@
     </div>
     <div class="form-group">
         {{ Form::label('jerarquia', 'Jerarquía') }}
-		{{ Form::select('jerarquia', array( 'Personal Superior' => 'Personal Superior',
-											'Personal Subalterno' => 'Personal Subalterno'),
-											'Personal Superior') }}
+        <select name='jerarquia' onchange="cambia_categoria()"> 
+            <option value="Personal Superior">Personal Superior</option> 
+            <option value="Personal Subalterno">Personal Subalterno</option>
+        </select>        
     </div>
     <div class="form-group">
         {{ Form::label('categoria', 'Categoría') }}
-		{{ Form::select('categoria', array( '(PG) Prefecto General' => '(PG) Prefecto General',
-											'(PM) Prefecto Mayor' => '(PM) Prefecto Mayor'),
-											'(PG) Prefecto General') }}
+        <select name="categoria"> 
+            <option value="(PG) Prefecto General">(PG) Prefecto General</option> 
+            <option value="(PM) Prefecto Mayor">(PM) Prefecto Mayor</option> 
+            <option value="(PP) Prefecto Principal">(PP) Prefecto Principal</option> 
+            <option value="(PR) Prefecto">(PR) Prefecto</option> 
+            <option value="(OP) Oficial Principal">(OP) Oficial Principal</option> 
+            <option value="(OA) Oficial Ayudante">(OA) Oficial Ayudante</option> 
+            <option value="(OX) Oficial Auxiliar">(OX) Oficial Auxiliar</option> 
+        </select>
     </div>
 
     {{ Form::submit('Guardar', array('class' => 'btn btn-primary')) }}

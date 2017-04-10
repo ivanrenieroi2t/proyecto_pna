@@ -13,16 +13,12 @@
 	            <td>{{ $value->nombre }}</td>
 	            <td>{{ $value->apellido }}</td>
 	            <td>
-	                <!-- delete the nerd (uses the destroy method DESTROY /nerds/{id} -->
+	                <a class="btn btn-small btn-success" href="{{ URL::to('personal/' . $value->id) }}" style="float: right; margin-left: 5px;">Mostrar</a>
+	                <a class="btn btn-small btn-info" href="{{ URL::to('personal/' . $value->id . '/edit') }}" style="float: right; margin-left: 5px;">Editar</a>
 	                {{ Form::open(array('url' => 'personal/' . $value->id, 'class' => 'pull-right')) }}
                     {{ Form::hidden('_method', 'DELETE') }}
-                    {{ Form::submit('Eliminar', array('class' => 'btn btn-warning')) }}
+                    {{ Form::submit('Eliminar', array('class' => 'btn btn-danger')) }}
 	                {{ Form::close() }}
-	                <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
-	                <a class="btn btn-small btn-success" href="{{ URL::to('personal/' . $value->id) }}">Mostrar</a>
-
-	                <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
-	                <a class="btn btn-small btn-info" href="{{ URL::to('personal/' . $value->id . '/edit') }}">Editar</a>
 	            </td>
 	        </tr>
 	    @endforeach

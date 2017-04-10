@@ -33,6 +33,11 @@ class PersonalController extends BaseController{
         $personal = new Personal;
         $personal->nombre = Input::get('nombre');
         $personal->apellido = Input::get('apellido');
+        $personal->direccion = Input::get('direccion');
+        $personal->telefono = Input::get('telefono');
+        $personal->celular = Input::get('celular');
+        $personal->jerarquia = Input::get('jerarquia');
+        $personal->categoria = Input::get('categoria');
       
         $personal->save();
 
@@ -81,6 +86,11 @@ class PersonalController extends BaseController{
             $personal = Personal::find($id);
             $personal->nombre = Input::get('nombre');
             $personal->apellido = Input::get('apellido');
+            $personal->direccion = Input::get('direccion');
+            $personal->telefono = Input::get('telefono');
+            $personal->celular = Input::get('celular');
+            $personal->jerarquia = Input::get('jerarquia');
+            $personal->categoria = Input::get('categoria');
             $personal->save();
 
             // redirect
