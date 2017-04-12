@@ -9,8 +9,13 @@ class PersonalController extends BaseController{
      */
     public function index()
     {
+        //levanto todos los registros de la DB. 
         $personal = Personal::all();
         return View::make('personal.index')->with('personal',$personal);
+        //Otras maneras de enviar datos a las vistas 
+        //Considerando que en la vista tenemos una variable $personal (seria la key del array)
+        //return View::make('personal.index',array('personal'=>$personal));
+        //
     }
 
     /**
@@ -30,20 +35,47 @@ class PersonalController extends BaseController{
      */
     public function store()
     {
-        $personal = new Personal;
-        $personal->nombre = Input::get('nombre');
-        $personal->apellido = Input::get('apellido');
-        $personal->direccion = Input::get('direccion');
-        $personal->telefono = Input::get('telefono');
-        $personal->celular = Input::get('celular');
-        $personal->jerarquia = Input::get('jerarquia');
-        $personal->categoria = Input::get('categoria');
-      
-        $personal->save();
+        //Validacion
+        $rules = array(
+            'nombre'=>'required|string',
+            'apellido'=>'required|string',
+            'direccion'=>'required|string',
+            'telefono'=>'required|numeric',
+            'celular'=>'required|numeric'
+            );
+        $messages = array(
+            'string' => 'El campo :attribute no permite números',
+            'numeric' => 'El campo :attribute solo permite números',
+            'required' => 'El campo :attribute no puede estar vacío'
+            );
+        $input = array(
+            'nombre'=> Input::get('nombre'),
+            'apellido'=> Input::get('apellido'),
+            'direccion'=> Input::get('direccion'),
+            'telefono'=> Input::get('telefono'),
+            'celular'=> Input::get('celular')
+            );
+        $validator = Validator::make($input,$rules,$messages);
 
-        // redirect
-        Session::flash('message', 'Personal guardado exitosamente!');
-        return Redirect::to('personal');
+        if ($validator->fails()) {
+            return Redirect::to('personal/create')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $personal = new Personal;
+            $personal->nombre = Input::get('nombre');
+            $personal->apellido = Input::get('apellido');
+            $personal->direccion = Input::get('direccion');
+            $personal->telefono = Input::get('telefono');
+            $personal->celular = Input::get('celular');
+            $personal->jerarquia = Input::get('jerarquia');
+            $personal->categoria = Input::get('categoria');
+            $personal->save();
+
+            // redirect
+            Session::flash('message', 'Personal guardado exitosamente!');
+            return Redirect::to('personal');
+        }    
     }
 
     /**

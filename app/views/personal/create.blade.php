@@ -44,7 +44,10 @@
         </select>
     </div>
 
-    {{ Form::submit('Guardar', array('class' => 'btn btn-primary')) }}
+    {{ Form::submit('Guardar', array('class' => 'btn btn-success')) }}
+    {{ Form::reset('Limpiar', array('class' => 'btn btn-warning'))}}
+    <a class="btn btn-primary" href="{{ URL::previous() }}">Volver</a>
+
 	{{ Form::close() }}
 @stop
 	

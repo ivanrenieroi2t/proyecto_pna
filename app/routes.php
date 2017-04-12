@@ -17,6 +17,7 @@ Route::get('/', function(){
 
 /* Rutas para CRUD Personal */
 
+
 Route::resource('jubilados', 'JubiladoController');
 
 Route::resource('personal', 'PersonalController');
